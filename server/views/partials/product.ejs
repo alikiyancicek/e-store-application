@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/bootstrap/dist/css/bootstrap.min.css' />
+    <link rel='stylesheet' href='/@fortawesome/fontawesome-free/css/all.min.css' />
+    <link rel='stylesheet' href='/Content/app.css' />
+</head>
+
+<%- include header.ejs%>
+    <%- include main_nav.ejs%>
+
+        <!--men Me Page Content-->
+
+        <body background="">
+            <main class="container-fluid">
+                <div class="container list-container pt-5" style="min-height: 70vh;">
+                    <!--title-->
+                    <!-- <h1 class="display-6 mt-5">Product</h1> -->
+                    <!--contents-->
+
+                    <div class="row mt-5">
+                        <div class="col-sm-12 col-xs-12 col-md-6">
+                            <img class="img-fluid" src="<%= product.image %>" alt="">
+                        </div>
+                        <div class="col-sm-12 col-xs-12 col-md-6">
+                            <table class="table border">
+                                <tbody>
+                                    <tr>
+                                        <th>Title</th>
+                                        <td>
+                                            <%= product.title %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Description</th>
+                                        <td>
+                                            <%= product.description %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Price</th>
+                                        <td>
+                                            <%= product.price %>$
+                                        </td>
+
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                            <div class="rating">
+                                <span class="rating__result"></span> 
+                                <i class="rating__star far fa-star"></i>
+                                <i class="rating__star far fa-star"></i>
+                                <i class="rating__star far fa-star"></i>
+                                <i class="rating__star far fa-star"></i>
+                                <i class="rating__star far fa-star"></i>
+                            </div> 
+                            
+                        </div>
+                        
+                    </div>
+
+
+                    <% if(displayName !=='' ) {%>
+
+                        <div class="row mt-3 border p-2">
+                            <div class="col-md-12">
+                                <h4>Add Comment</h4>
+                                <form method="POST" action="/product/<%= product._id %>/add_comment">
+                                    <input type="hidden" name="product_id" value="<%= product._id %>">
+                                    <div class="form-group">
+                                        <input type="text" name="comment" class="form-control"
+                                            placeholder="Enter comment" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-secondary float-right" type="submit">Post
+                                            Comment</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                        
+                     
+                        <% } %>
+
+
+                            <div class="row border mt-2">
+                                <div class="col-md-12 pb-3">
+                                    <h4>Comments</h4>
+                                    <% product.comments.forEach(function(comment, index){ %>
+
+                                        <div class="card my-1">
+                                            <div class="card-header py-0">
+                                                <h5>
+                                                    <%= comment.user.username %>
+                                                </h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <%= comment.comment %>
+                                            </div>
+                                        </div>
+                                        <% }) %>
+                                </div>
+                            </div>
+
+                             <div class="row mt-3 border p-2">
+                            <div class="col-md-12">
+                                <h4>Add Review</h4>
+                                <form method="POST" action="/product/<%= product._id %>/add_review">
+                                    <input type="hidden" name="product_id" value="<%= product._id %>">
+                                    <div class="form-group">
+                                        <input type="text" name="review" class="form-control"
+                                            placeholder="Enter review" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-secondary float-right" type="submit">Post
+                                            Review</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row border mt-2">
+                                <div class="col-md-12 pb-3">
+                                    <h4>Reviews</h4>
+                                    <% product.reviews.forEach(function(review, index){ %>
+                                        <div class="card my-1">
+                                            <div class="card-header py-0">
+                                                <h5>
+                                                    <%= review.user.username %>
+                                                </h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <%= review.review %>
+                                            </div>
+                                        </div>
+                                        <% }) %>
+                                </div>
+                            </div>
+                           
+                
+                </div>
+            </main>
+            <%- include bottom_nav.ejs%>
+        </body>
+        
+        <script>
+        const ratingStars = [...document.getElementsByClassName("rating__star")];
+const ratingResult = document.querySelector(".rating__result");
+
+printRatingResult(ratingResult);
+
+function executeRating(stars, result) {
+   const starClassActive = "rating__star fas fa-star";
+   const starClassUnactive = "rating__star far fa-star";
+   const starsLength = stars.length;
+   let i;
+   stars.map((star) => {
+      star.onclick = () => {
+         i = stars.indexOf(star);
+
+         if (star.className.indexOf(starClassUnactive) !== -1) {
+            printRatingResult(result, i + 1);
+            for (i; i >= 0; --i) stars[i].className = starClassActive;
+         } else {
+            printRatingResult(result, i);
+            for (i; i < starsLength; ++i) stars[i].className = starClassUnactive;
+         }
+      };
+   });
+}
+
+function printRatingResult(result, num = 0) {
+   result.textContent = `${num}/5`;
+}
+
+executeRating(ratingStars, ratingResult);
+        </script>

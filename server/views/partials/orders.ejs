@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="/@fortawesome/fontawesome-free/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/Content/app.css" />
+  </head>
+
+  <%- include header.ejs%> <%- include main_nav.ejs%>
+
+  <!--men Me Page Content-->
+
+  <body background="">
+    <main class="container-fluid">
+      <div class="container list-container pt-5 mt-5" style="min-height: 70vh">
+        <!--title-->
+        <!-- <h1 class="display-6 mt-5">Product</h1> -->
+        <!--contents-->
+
+        <table class="table">
+          <thead>
+            <th>Order ID</th>
+            <th>TOTAL PRICE</th>
+            <!--th>QTY</th>
+            <th>ADDRESS</th>
+            <th>NOTE</th>-->
+            <th>ITEMS</th>
+          </thead>
+          <tbody>
+            <% orders.forEach(function(order){ %>
+            <tr>
+              <td><%= order._id %></td>
+              <td><%= order.price %> $</td>
+              <!--<td><%= order.qty %></td>
+              <td><%= order.address %></td>
+              <td><%= order.deliveryNote %></td>-->
+              <td>
+                <!-- <ul style="list-style-type: none;"> -->
+                <% order.items.forEach(function(item){ %>
+
+                <div class="my-1">
+                  <a target="_blank" href="/product/<%= item._id %>"
+                    ><img
+                      src="<%= item.image %>"
+                      width="50"
+                      class="img-fluid"
+                      alt=""
+                    />
+                    <%= item.title %> (<%= item.qty
+                    %>)<%=item.address%><%=item.deliveryNote%>
+                  </a>
+                </div>
+
+                <% }) %>
+                <!-- </ul> -->
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </main>
+    <%- include bottom_nav.ejs%>
+  </body>
+</html>

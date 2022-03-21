@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="/@fortawesome/fontawesome-free/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/Content/app.css" />
+  </head>
+
+  <%- include header.ejs%> <%- include main_nav.ejs%>
+
+  <!--men Me Page Content-->
+
+  <body background="">
+    <main class="container-fluid">
+      <div class="container list-container pt-5" style="min-height: 70vh">
+        <!--title-->
+        <!-- <h1 class="display-6 mt-5">Product</h1> -->
+        <!--contents-->
+
+        <div class="container mt-5">
+          <div class="card">
+            <div class="card-body">
+              <form action="/cart/payment" method="POST">
+                <h1>Payment</h1>
+                <center>
+                  <table style="width: 50%">
+                    <tr>
+                      <td>
+                        <label>Card Type</label>
+                      </td>
+                      <td>
+                        <input type="radio" value="Debit" checked /><label
+                          for="Debit"
+                          >&nbsp;&nbsp;Debit</label
+                        >&nbsp;&nbsp;&nbsp;
+                        <input type="radio" value="Credit" /><label for="Credit"
+                          >&nbsp;&nbsp;Credit</label
+                        >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <label>Card Number</label>
+                      </td>
+                      <td>
+                        <input type="text" required maxlength="12" />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><label>Expiry Date</label></td>
+                      <td>
+                        <input
+                          type="text"
+                          class="cc-exp"
+                          placeholder="Expires MM/YY"
+                          required
+                          maxlength="9"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <label>CVV</label>
+                      </td>
+                      <td>
+                        <input
+                          type="password"
+                          class="cc-cvc"
+                          pattern="\d*"
+                          x-autocompletetype="cc-csc"
+                          placeholder="Security code"
+                          required
+                          autocomplete="off"
+                        />
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td></td>
+                      <td>
+                        .
+                        <input
+                          type="submit"
+                          name="PAY"
+                          style="width: 54%; margin-top: 20px"
+                        />
+                        <!--<button style="width: 54%; margin-top: 20px">
+                          Pay
+                        </button>-->
+                      </td>
+                    </tr>
+                  </table>
+                </center>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <%- include bottom_nav.ejs%>
+  </body>
+</html>
