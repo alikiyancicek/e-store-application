@@ -1,6 +1,6 @@
 const express =  require('express');  
 const router = new express.Router();
-const Product = require('../model/product')
+const Product = require('../models/product')
 
 router.get('/search', (req,res) =>{
     if(!req.query.search){
