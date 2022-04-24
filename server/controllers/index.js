@@ -386,18 +386,19 @@ module.exports.performLogout = (req, res, next) => {
   });
   res.redirect("/");
 };
-module.exports.searchProduct = (req, res) => {
-  let searchOptions = {}
-  if (req.query.name != null && req.query.name !== '') {
-    searchOptions.name = new RegExp(req.query.name, 'i')
-  }
-  try {
-    const products= await title.find(searchOptions)
-    res.render("partials/search", {
-      title: products,
-      searchOptions: req.query
-    })
-  } catch {
-    res.redirect('/')
-  }
-}
+//module.exports.searchProduct = (req, res) => {
+//  let searchOptions = {}
+//  if (req.query.name != null && req.query.name !== '') {
+//    searchOptions.name = new RegExp(req.query.name, 'i')
+//  }
+//  try {
+//    const products= await title.find(searchOptions)
+//    res.render("partials/search", {
+//      title: products,
+//      searchOptions: req.query
+//    })
+//  } catch {
+//    res.redirect('/')
+//  }
+//}
+//

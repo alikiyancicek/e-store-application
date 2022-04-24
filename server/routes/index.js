@@ -75,5 +75,5 @@ router.post("/register", indexController.processRegisterPage);
 router.get("/logout", indexController.performLogout);
 
 /* Get Search*/
-router.get("/search", indexController.searchProduct);
+//router.get("/search", indexController.searchProduct);
 module.exports = router;
