@@ -1,2 +1,2 @@
 # e-store-application
-# front end build with EJS templeting and back end build with nodejs-expressjs.
+# Front end build with EJS templeting. Back end build with Nodejs-Expressjs.
